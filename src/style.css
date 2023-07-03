@@ -1,0 +1,52 @@
+body {
+  background-color: whitesmoke;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  gap: 10px;
+  background-color: rgb(84, 97, 196);
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+button {
+  border-radius: 20px;
+  border-color: white;
+}
+input {
+  border-radius: 20px;
+  border-color: white;
+}
+
+.gallery {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 1200px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.photo-card {
+  display: block;
+  width: 400px;
+}
+
+.info {
+  display: flex;
+  gap: 10px;
+}
+img {
+  width: 400px;
+}
+.load-more {
+  margin-right: auto;
+  margin-left: auto;
+}
