@@ -26,7 +26,7 @@ async function onSub(event) {
     loadMoreBtn.style.display = 'block';
 };
 async function makeMarkup(imgs) {
-    const markUp = imgs.map(el => imgMarkup(el));
+   return const markUp = imgs.map(el => imgMarkup(el));
 };
 loadMoreBtn.addEventListener('click',loadMore)
 async function loadMore() {
