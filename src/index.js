@@ -1,7 +1,7 @@
 import Notiflix from 'notiflix';
 import { search } from './api-staff';
 import imgMarkup from './img-markup.hbs'
-    
+
 const form = document.querySelector('form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
@@ -15,6 +15,7 @@ form.addEventListener('submit', onSub);
 
 async function onSub(event) {
     event.preventDefault();
+    gallery.innerHTML = '';
     loadMoreBtn.style.display = 'none';
     curPage = 1;
     const res = await search(input.value);
@@ -25,9 +26,8 @@ async function onSub(event) {
     gallery.innerHTML=makeMarkup(res.data.hits);
     loadMoreBtn.style.display = 'block';
 };
-function makeMarkup(imgs) {
-   const markup = imgs.map(el => imgMarkup(el));
-return markup;
+async function makeMarkup(imgs) {
+    gallery.innerHTML += imgs.map(el => imgMarkup(el));
 };
 loadMoreBtn.addEventListener('click',loadMore)
 async function loadMore() {
@@ -37,5 +37,5 @@ async function loadMore() {
         loadMoreBtn.style.display = 'none';
         return Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
     }
-    gallery.innerHTML+=makeMarkup(res.data.hits);
+   makeMarkup(res.data.hits) ;
 }
