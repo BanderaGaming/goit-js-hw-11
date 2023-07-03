@@ -22,12 +22,11 @@ async function onSub(event) {
     if (hits.length === 0) {
         return Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
     }
-    makeMarkup(res.data.hits);
+    gallery.innerHTML=makeMarkup(res.data.hits);
     loadMoreBtn.style.display = 'block';
 };
 async function makeMarkup(imgs) {
-    gallery.innerHTML = '';
-    gallery.innerHTML = imgs.map(el => imgMarkup(el));
+    const markUp = imgs.map(el => imgMarkup(el));
 };
 loadMoreBtn.addEventListener('click',loadMore)
 async function loadMore() {
@@ -37,5 +36,5 @@ async function loadMore() {
         loadMoreBtn.style.display = 'none';
         return Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
     }
-    makeMarkup(res.data.hits);
+    gallery.innerHTML+=makeMarkup(res.data.hits);
 }
