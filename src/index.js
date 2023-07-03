@@ -8,6 +8,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 const input = document.querySelector('input'); 
 
 let curPage = 1;
+// let hits = 0;
 
 loadMoreBtn.style.display = 'none';
 
@@ -24,6 +25,10 @@ async function onSub(event) {
         return Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
     }
     makeMarkup(res.data.hits);
+    if (res.data.totalHits < 40) {
+        loadMoreBtn.style.display = 'none';
+        return Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+    }
     loadMoreBtn.style.display = 'block';
 };
 async function makeMarkup(imgs) {
@@ -33,9 +38,15 @@ loadMoreBtn.addEventListener('click',loadMore)
 async function loadMore() {
     curPage+=1
     const res = await search(input.value, curPage);
-    if (res.data.hits.length === 0) {
+    makeMarkup(res.data.hits);
+    if (res.data.hits.length < 40) {
         loadMoreBtn.style.display = 'none';
-        return Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-    };
-   makeMarkup(res.data.hits);
+        return Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+    }
+};
+function checkImg(imgCount) {
+    if (imgCount < 40) {
+        loadMoreBtn.style.display = 'none';
+        return Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+    }
 }
